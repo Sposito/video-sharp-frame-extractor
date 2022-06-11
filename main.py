@@ -6,6 +6,7 @@ ap = argparse.ArgumentParser()
 ap.add_argument('-i', '--input', type=str, required=True, help='path to input video')
 ap.add_argument('-s', '--steps', type=int, default=30, help='the number of frame from where it picks the sharpest,'
                                                             ' defaults to 30')
+ap.add_argument('-f', '--scale_factor', type=int, default=8, help='how many times image will be halved')
 args = vars(ap.parse_args())
 
 
@@ -24,15 +25,16 @@ def main():
     ini_time = time.time()
     success, img = vid.read()
     csv = 'Filename,id,frame\n'
+    scale_factor = args['scale_factor']
 
     while success:
-        size = (int(img.shape[1]/2), int(img.shape[0]/2))
-        # img = cv2.resize(img, size)
+        size = (int(img.shape[1]/scale_factor), int(img.shape[0]/scale_factor))
+        img = cv2.resize(img, size)
         mean = cv2.Laplacian(img, cv2.CV_64F).var()
         win_counter = frame_counter // step
 
         if win_counter != current_window_frame:
-            file_name = f'frames/{win_counter:04}_{mean}.png'
+            file_name = f'frames/{win_counter:03}.png'
             cv2.imwrite(file_name, current_img)
             highest_mean = -1
             current_window_frame = win_counter
