@@ -38,8 +38,9 @@ jobs:
       run : |
         sudo apt update
         sudo apt install blender
+        sudo apt install p7zip-full
         ls .
-        unzip test.zip
+        7z x test.zip
         blender -b test.blend -o vid.avi  -a
     - name: extract frames
       run: |
