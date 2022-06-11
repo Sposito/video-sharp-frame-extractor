@@ -38,6 +38,7 @@ jobs:
       run : |
         sudo apt update
         sudo apt install blender
+        ls .
         unzip test.zip
         blender -b test.blend -o vid.avi  -a
     - name: extract frames
