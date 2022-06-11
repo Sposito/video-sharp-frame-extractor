@@ -11,7 +11,7 @@ args = vars(ap.parse_args())
 
 
 def main():
-    img_path = args['input']  # '/media/thiago/HardStorage0/home/thiago/Storage/Photogrametry/IMG_9382.MOV'
+    img_path = args['input']
 
     vid = cv2.VideoCapture(img_path)
 
