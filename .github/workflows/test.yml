@@ -36,8 +36,8 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Generate sintetic data
       run : |
-        apt update
-        apt install blender
+        sudo apt update
+        sudo apt install blender
         unzip test.zip
         blender -b test.blend -o vid.avi  -a
     - name: extract frames
