@@ -49,7 +49,7 @@ jobs:
       run: |
         mkdir frames
         python main.py -i vid.avi -s 30 -f 1
-        ls frames
+        cat log.csv | sed 's/,/ ,/g' | column -t -s,
         
         
     
